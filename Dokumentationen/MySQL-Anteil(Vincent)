@@ -1,0 +1,6 @@
+Da wir ein RPG machen werden wir sachen wie Items, NPCs, Gespräche der NPCs, Quests, Speicherplätze für 
+Fortschritte und sowas gebrauchen. Hierfür werde ich eine Datenbank erstellen, die dann genau 
+diese Inhalte dem Spieler wieder gibt wenn er eine Bestimmte Ereigniss erreicht hat oder eine Person
+anspricht. 
+Eventuell kommen hierbei noch weiter Aufgaben und Funktionen vor die sich erst im laufe der 
+erstelleung der Datenbank und des spiels herraus stellen.
