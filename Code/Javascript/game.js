@@ -52,6 +52,9 @@ function mouse(e){
 // Werden alle Variablen generiert, die der Charakter benötigt.
 
 function Stoepsel() {
+	
+	this.wait = 0;
+	
 	// drawX und drawY beschreiben die Koordinaten auf dem Canvas
 	// auf dem sich Stoepsel befindet
 	
@@ -75,7 +78,10 @@ function Stoepsel() {
 	
 	this.hp = 100; //hier wird später der Datenbankeintrag für Leben stehen
 	this.mp = 20; // manawert aus Datenban
-	this.speed = 3;
+	
+	// Charakereigenschaften
+	
+	this.speed = 1;
 	this.is_downkey = false;
 	this.is_upkey = false;
 	this.is_leftkey = false;
@@ -86,7 +92,41 @@ function Stoepsel() {
 
 Stoepsel.prototype.draw = function() {
 	stoepsel.check_keys();
-	main_ctx.drawImage(stoepsel_image, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+	
+	if (this.wait == 0 && this.is_downkey == false) {
+		main_ctx.drawImage(stoepsel_image, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+	} 
+	else if (this.is_downkey && this.wait >= 0 && this.wait < 16) {
+		//main_ctx.clearRect(0,0,1440,960);
+		main_ctx.drawImage(stoepsel_image, 64, 128, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+		this.wait ++;
+		this.drawY += this.speed;
+	} 
+	else if (this.is_downkey && this.wait > 15 && this.wait < 32) {
+		main_ctx.drawImage(stoepsel_image, 320, 128, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+		this.wait ++;
+		this.drawY += this.speed;
+	} else if (this.wait >= 32) {
+		this.wait = 0;
+		this.is_downkey = false;
+	
+		/*for (var i = 0; i < 32; i++) {
+			this.wait ++;
+			this.drawY += this.speed;
+			if (this.wait == 0) {
+				main_ctx.clearRect(0,0,1440,960);
+				main_ctx.drawImage(stoepsel_image, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+			} else if (this.wait > 0 && this.wait < 16) {
+				main_ctx.clearRect(0,0,1440,960);
+				main_ctx.drawImage(stoepsel_image, 64, 128, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+			} else if (this.wait > 15 && this.wait < 32){
+				main_ctx.clearRect(0,0,1440,960);
+				main_ctx.drawImage(stoepsel_image, 320, 128, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
+			} else {
+				this.wait = 0;
+			}
+		}*/
+	}
 	//Befehl um Stöpsel zu "Malen"
 };
 
@@ -99,7 +139,12 @@ Stoepsel.prototype.check_keys = function() {
 	// zu ändern
 	
 	if (this.is_downkey) {
-		this.drawY += this.speed;
+		/*for (var i = 0; i < 22; i++) {
+			this.wait ++;
+			this.drawY += this.speed;
+			window.alert(this.wait);
+		}*/
+		//this.wait = 0;
 	} else if (this.is_upkey){
 		this.drawY -= this.speed;
 	} else if (this.is_rightkey) {
@@ -108,6 +153,28 @@ Stoepsel.prototype.check_keys = function() {
 		this.drawX -= this.speed;
 	}
 };
+
+function loop() {
+	
+	main_ctx.clearRect(0,0,1440,960);
+	
+	stoepsel.draw();
+	
+	if (is_playing) {
+		requestaframe(loop);
+	}
+	
+}
+
+function start_loop(){
+	is_playing = true;
+	loop();
+	background_ctx.drawImage(hafenstadt, 0, 0);
+}
+
+function stop_loop(){
+	is_playing = false;
+}
 
 //Diese Funktion ist dafür da um zu erkennen ob Tasten gedrückt 
 //werden und dann bestimmte Befehle auszuführen! Sie beschreibt 
@@ -152,26 +219,4 @@ function key_up(e) {
 		stoepsel.is_leftkey = false; 
 		e.preventDefault();
 	}
-}
-
-function loop() {
-	
-	main_ctx.clearRect(0,0,1440,960);
-	
-	stoepsel.draw();
-	
-	if (is_playing) {
-		requestaframe(loop);
-	}
-	
-}
-
-function start_loop(){
-	is_playing = true;
-	loop();
-	background_ctx.drawImage(hafenstadt, 0, 0);
-}
-
-function stop_loop(){
-	is_playing = false;
 }
