@@ -8,3 +8,14 @@ mit Hilfe der Pfeiltasten gehen. Das Ganze sieht leider noch sehr unschön aus. 
 dabei eine Animation abgespielt wird. 
 
 Pause.
+
+ab 19:30 - ~23 Uhr & 17.11.2015 15:30 - 17:30: (In und nach der Vorlesung)
+
+Wie ich Ihnen heute in der Pause der Vorlesung mitgeteilt habe, habe ich daran gearbeitet eine vernünftige, flüssige Laufanimation zu implementieren, anstatt einfach nur eine Verschiebung via Kästchen zu realisieren. 
+Dabei ging ich mehrmals vor und zurück und habe zig verschiedene Lösungsansätze probiert und ausschließen können. 
+Nach dem Gespräch mit Ihnen hat es mich insofern weiter gebracht, das ich die Form des funktionalen Programmierens besser verstanden habe und nach einem Gespräch mit meinen Kommilitonen den Unterschied zwischen Java und Javascript für mich persönlich relativ genau (allerdings eher unfachlich) zu verstehen beginne. 
+Bis zu dem Zeitpunkt hatte ich versucht, ähnlich wie in Java mit Threads, gleichzeitiglaufende Funktionen mit Schleifen auszustatten die dann den Charakter neu zeichnen. 
+Nach einer intensiven Auseinandersetzung und einem Debugging bis ins kleinste Detail, wurde uns klar, dass diese Funktionen
+nicht nebeneinander laufen, sondern sich nur gegenseitig aufrufen und deshalb die Variante mit Schleifen problematisch ist. Da das Loopen der Funktion ja quaise eine Schleife ist, reicht es auch einfach eine If else if else Anweisung zu programmieren. Nun wird die Aktion fast richtig ausgeführt - der Charakter wird teilweise noch gar nicht gezeichnet und verschwindet somit. 
+An diesem Problem und an der Realisierung der Laufanimation in alle Richtungen werde ich die nächsten Tage arbeiten.
+Danach möchte ich mich der "Teleportation" von einer Karte zur anderen annehmen um schließlich mit dem Kampfsystem anfangen zu können. 
